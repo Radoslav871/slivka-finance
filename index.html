@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slivka Slivková — Finančná poradkyňa</title>
+  <style>
+    :root {
+      --bg:           #FAFAF8;
+      --surface:      #FFFFFF;
+      --border:       #EBEBEB;
+      --orange:       #E86A10;
+      --orange-light: #FFF3EB;
+      --orange-dark:  #C45508;
+      --text:         #1A1212;
+      --text-muted:   #6B6060;
+      --text-dim:     #AAAAAA;
+
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ──────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 60px;
+      height: 68px;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span { color: var(--orange); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-ig {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .nav-ig:hover { color: var(--orange-dark); }
+
+    /* ── HERO ──────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      align-items: center;
+      padding: 100px 60px 60px;
+      gap: 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-left {}
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 24px;
+    }
+
+    .hero-heading {
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--text);
+      text-wrap: balance;
+      margin-bottom: 24px;
+    }
+
+    .hero-quote {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 40px;
+      font-style: italic;
+      border-left: 3px solid var(--orange);
+      padding-left: 20px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 28px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--orange-dark); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+
+    .hero-photo {
+      position: relative;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--orange-light);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--orange);
+      border: 2px dashed #F0C4A0;
+    }
+
+    .photo-placeholder svg {
+      width: 56px;
+      height: 56px;
+      opacity: 0.5;
+    }
+
+    .photo-placeholder span {
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+    }
+
+    /* ── ABOUT ──────────────────────────────────────────────── */
+    #o-mne {
+      padding: 100px 60px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text {}
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .section-heading {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 20px;
+      text-wrap: balance;
+    }
+
+    .body-text {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .body-text + .body-text { margin-top: 14px; }
+
+    .about-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .value-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 20px;
+      transition: border-color 0.2s;
+    }
+    .value-card:hover { border-color: #F0C4A0; }
+
+    .value-icon {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .value-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .value-desc {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── SERVICES ──────────────────────────────────────────── */
+    .service-section {
+      padding: 100px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .service-section.alt { background: var(--orange-light); }
+
+    .service-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .service-inner.reverse { direction: rtl; }
+    .service-inner.reverse > * { direction: ltr; }
+
+    .service-content {}
+
+    .service-list {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .service-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .service-item::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+      margin-top: 9px;
+    }
+
+    .service-visual {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .service-section.alt .service-visual {
+      background: var(--surface);
+    }
+
+    .service-stat {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+    .service-stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .service-stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--orange);
+    }
+
+    .service-stat-label {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ── CONTACT ──────────────────────────────────────────── */
+    #kontakt {
+      padding: 100px 60px;
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info { padding-top: 8px; }
+
+    .contact-detail {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-item-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .contact-item-value {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+    }
+
+    .contact-item-value a {
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .contact-item-value a:hover { color: var(--orange-dark); }
+
+    .ig-block {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px;
+      background: var(--orange-light);
+      border-radius: 8px;
+      border: 1px solid #F0C4A0;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .ig-block:hover { background: #FFE8D4; }
+
+    .ig-block-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ig-block-icon svg { width: 20px; height: 20px; fill: white; }
+
+    .ig-block-text {}
+    .ig-block-name { font-size: 0.9375rem; font-weight: 600; color: var(--text); }
+    .ig-block-sub { font-size: 0.8125rem; color: var(--text-muted); }
+
+    /* Form */
+    .form { display: flex; flex-direction: column; gap: 16px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    .field label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .field input,
+    .field textarea {
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+      outline: none;
+      resize: none;
+      transition: border-color 0.15s;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--text-dim); }
+
+    .field input:focus,
+    .field textarea:focus { border-color: var(--orange); }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      padding: 28px 60px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--text-muted); }
+
+    /* ── FOCUS ──────────────────────────────────────────────── */
+    :focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      nav { padding: 0 24px; }
+      .nav-links { gap: 18px; }
+
+      #hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+      .hero-photo { max-width: 320px; }
+
+      #o-mne { grid-template-columns: 1fr; padding: 72px 24px; gap: 48px; }
+      .about-values { grid-template-columns: 1fr; }
+
+      .service-section { padding: 72px 24px; }
+      .service-inner { grid-template-columns: 1fr; gap: 40px; }
+      .service-inner.reverse { direction: ltr; }
+
+      #kontakt { padding: 72px 24px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+
+      footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Slivka<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#o-mne">O mne</a></li>
+      <li><a href="#hypoteky">Hypotéky</a></li>
+      <li><a href="#investovanie">Investovanie</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="nav-ig">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <span class="hero-eyebrow">Finančná poradkyňa</span>
+      <h1 class="hero-heading">Vaše peniaze,<br>vaša budúcnosť.</h1>
+      <p class="hero-quote">
+        Financie nie sú len o číslach — sú o rozhodnutiach, ktoré formujú váš život.
+        Pomôžem vám robiť tie správne.
+      </p>
+      <div class="hero-actions">
+        <a href="#kontakt" class="btn btn-primary">Nezáväzná konzultácia</a>
+        <a href="#o-mne" class="btn btn-ghost">Viac o mne</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span>Fotografia</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="o-mne">
+    <div class="about-text">
+      <p class="section-eyebrow">O mne</p>
+      <h2 class="section-heading">Finančné poradenstvo<br>s ľudským prístupom.</h2>
+      <p class="body-text">
+        Volám sa Slivka Slivková a pomáham ľuďom zorientovať sa vo svete financií —
+        či už ide o hypotéku na vysnívaný byt, alebo o investovanie pre lepšiu budúcnosť.
+      </p>
+      <p class="body-text">
+        Verím, že každý si zaslúži zrozumiteľné a úprimné poradenstvo. Nepredávam produkty —
+        hľadám riešenia, ktoré skutočne dávajú zmysel pre vás a vašu situáciu.
+      </p>
+    </div>
+    <div class="about-values">
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <div class="value-title">Dôvera</div>
+        <div class="value-desc">Transparentný prístup bez skrytých poplatkov a zbytočného žargónu.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🎯</div>
+        <div class="value-title">Individuálny prístup</div>
+        <div class="value-desc">Každý klient má inú situáciu. Riešenia šijeme na mieru.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📚</div>
+        <div class="value-title">Vzdelávanie</div>
+        <div class="value-desc">Vysvetlím vám každý krok, aby ste rozumeli vlastným financiám.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📞</div>
+        <div class="value-title">Dostupnosť</div>
+        <div class="value-desc">Som tu, keď ma potrebujete — nielen pri podpise zmluvy.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HYPOTÉKY -->
+  <section class="service-section" id="hypoteky">
+    <div class="service-inner">
+      <div class="service-content">
+        <p class="section-eyebrow">Hypotéky</p>
+        <h2 class="section-heading">Váš vlastný byt<br>bez zbytočného stresu.</h2>
+        <p class="body-text">
+          Hypotéka je často najväčšie finančné rozhodnutie v živote. Prevediem vás celým
+          procesom — od výberu správneho produktu až po podpis zmluvy.
+        </p>
+        <div class="service-list">
+          <div class="service-item">Porovnanie ponúk od viacerých bánk</div>
+          <div class="service-item">Pomoc s vybavením a dokumentáciou</div>
+          <div class="service-item">Refinancovanie existujúcej hypotéky</div>
+          <div class="service-item">Výpočet optimálnej výšky splátky</div>
+          <div class="service-item">Konzultácia zadarmo, bez záväzkov</div>
+        </div>
+        <div style="margin-top: 32px;">
+          <a href="#kontakt" class="btn btn-primary">Chcem hypotéku</a>
+        </div>
+      </div>
+      <div class="service-visual">
+        <div class="service-stat">
+          <div class="service-stat-value">Viacero</div>
+          <div class="service-stat-label">bánk na porovnanie v jednom mieste</div>
+        </div>
+        <div class="service-stat">
+          <div class="service-stat-value">100%</div>
+          <div class="service-stat-label">nezávislé poradenstvo — vždy na vašej strane</div>
+        </div>
+        <div class="service-stat">
+          <div class="service-stat-value">Zdarma</div>
+          <div class="service-stat-label">prvá konzultácia bez akýchkoľvek záväzkov</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTOVANIE -->
+  <section class="service-section alt" id="investovanie">
+    <div class="service-inner reverse">
+      <div class="service-content">
+        <p class="section-eyebrow">Investovanie</p>
+        <h2 class="section-heading">Nechajte peniaze<br>pracovať za vás.</h2>
+        <p class="body-text">
+          Investovanie nie je len pre bohatých. Ukážem vám, ako začať — bezpečne,
+          zrozumiteľne a s jasnými cieľmi. Či šetríte na dôchodok, byt, alebo len
+          chcete ochránit úspory pred infláciou.
+        </p>
+        <div class="service-list">
+          <div class="service-item">Podielové fondy a ETF portfóliá</div>
+          <div class="service-item">Dôchodkové sporenie (III. pilier)</div>
+          <div class="service-item">Pravidelné investovanie od malých súm</div>
+          <div class="service-item">Nastavenie investičného profilu</div>
+          <div class="service-item">Dlhodobá správa a prehodnocovanie portfólia</div>
+        </div>
+        <div style="margin-top: 32px;">
+          <a href="#kontakt" class="btn btn-primary">Chcem investovať</a>
+        </div>
+      </div>
+      <div class="service-visual">
+        <div class="service-stat">
+          <div class="service-stat-value">Dlhodobo</div>
+          <div class="service-stat-label">investovanie ako stratégia, nie špekulácia</div>
+        </div>
+        <div class="service-stat">
+          <div class="service-stat-value">Flexibilne</div>
+          <div class="service-stat-label">začnite aj s malou sumou každý mesiac</div>
+        </div>
+        <div class="service-stat">
+          <div class="service-stat-value">Bezpečne</div>
+          <div class="service-stat-label">regulované produkty s jasnou štruktúrou</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <p class="section-eyebrow">Kontakt</p>
+        <h2 class="section-heading">Začnime<br>rozhovor.</h2>
+        <p class="body-text">
+          Prvá konzultácia je vždy bezplatná. Napíšte mi alebo vyplňte formulár
+          a ozvem sa vám do 24 hodín.
+        </p>
+        <div class="contact-detail">
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">
+              <a href="mailto:info@slivkova.sk">info@slivkova.sk</a>
+            </div>
+          </div>
+          <div>
+            <div class="contact-item-label">Lokalita</div>
+            <div class="contact-item-value">Slovensko</div>
+          </div>
+        </div>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="ig-block">
+          <div class="ig-block-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div class="ig-block-text">
+            <div class="ig-block-name">Sledujte ma na Instagrame</div>
+            <div class="ig-block-sub">Tipy, novinky a finančné inšpirácie</div>
+          </div>
+        </a>
+      </div>
+      <div>
+        <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-row">
+            <div class="field">
+              <label for="meno">Meno</label>
+              <input type="text" id="meno" name="meno" placeholder="Vaše meno" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="vas@email.sk" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="tema">Téma</label>
+            <input type="text" id="tema" name="tema" placeholder="Hypotéka / Investovanie / Iné" />
+          </div>
+          <div class="field">
+            <label for="sprava">Správa</label>
+            <textarea id="sprava" name="sprava" rows="5" placeholder="Popíšte vašu situáciu alebo otázku..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="align-self: flex-start;">Odoslať správu</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-copy">© 2025 Slivka Slivková — Finančná poradkyňa</span>
+    <div class="footer-links">
+      <a href="#hypoteky">Hypotéky</a>
+      <a href="#investovanie">Investovanie</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </footer>
+
+</body>
+</html>
