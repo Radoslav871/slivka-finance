@@ -487,9 +487,40 @@
     :focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 
     /* ── RESPONSIVE ──────────────────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
     @media (max-width: 860px) {
-      nav { padding: 0 24px; }
-      .nav-links { gap: 18px; }
+      nav { padding: 0 24px; position: relative; flex-wrap: wrap; height: auto; min-height: 64px; }
+      .hamburger { display: flex; }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        width: 100%;
+        padding: 8px 0 16px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 10px 0; font-size: 1rem; border-bottom: 1px solid var(--border); }
+      .nav-links li:last-child a { border-bottom: none; }
 
       #hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
       .hero-photo { max-width: 320px; }
@@ -500,6 +531,10 @@
       .service-section { padding: 72px 24px; }
       .service-inner { grid-template-columns: 1fr; gap: 40px; }
       .service-inner.reverse { direction: ltr; }
+
+      #kalkulacka { padding: 72px 24px !important; }
+      .calc-inputs { grid-template-columns: 1fr !important; }
+      .calc-results { grid-template-columns: 1fr !important; }
 
       #kontakt { padding: 72px 24px; }
       .contact-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -519,7 +554,10 @@
   <!-- NAV -->
   <nav>
     <a href="#hero" class="nav-logo">Lucia<span>.</span></a>
-    <ul class="nav-links">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
       <li><a href="#o-mne">O mne</a></li>
       <li><a href="#investovanie">Investovanie</a></li>
       <li><a href="#kalkulacka">Kalkulačka</a></li>
@@ -637,7 +675,7 @@
       <h2 class="section-heading">Koľko vám investícia zarobí?</h2>
       <p class="body-text" style="margin-bottom: 40px;">Zadajte sumu, ktorú chcete investovať každý mesiac, a uvidíte, čo vám môže priniesť čas a zložený úrok.</p>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:32px;">
+      <div class="calc-inputs" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:32px;">
 
         <div class="field">
           <label class="form-label" for="mesacna-suma">Mesačná investícia (€)</label>
@@ -655,7 +693,7 @@
         </div>
       </div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:32px;">
+      <div class="calc-results" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:32px;">
         <div style="background:var(--bg); padding:28px 24px;">
           <div style="font-size:0.6875rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); margin-bottom:8px;">Celková investícia</div>
           <div id="total-invested" style="font-size:1.75rem; font-weight:700; letter-spacing:-0.02em; color:var(--text);">12 000 €</div>
@@ -816,6 +854,15 @@
   </footer>
 
   <script>
+    document.getElementById('hamburger').addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('open');
+    });
+    document.querySelectorAll('#nav-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+
     function formatEur(n) {
       return n.toLocaleString('sk-SK', { maximumFractionDigits: 0 }) + ' €';
     }
