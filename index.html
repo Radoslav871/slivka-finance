@@ -484,6 +484,65 @@
     .footer-links a:hover { color: var(--text-muted); }
 
     /* ── FOCUS ──────────────────────────────────────────────── */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .cert-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .cert-card:hover {
+      border-color: var(--orange);
+      box-shadow: 0 4px 16px rgba(232,106,16,0.08);
+    }
+
+    .cert-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--orange-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .cert-body { flex: 1; }
+
+    .cert-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .cert-sub {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .cert-arrow {
+      font-size: 1.125rem;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .cert-grid { grid-template-columns: 1fr; }
+      #certifikaty { padding: 72px 24px !important; }
+    }
+
     :focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 
     /* ── RESPONSIVE ──────────────────────────────────────────── */
@@ -781,6 +840,65 @@
           <div class="service-stat-value">100%</div>
           <div class="service-stat-label">nezávislé poradenstvo — vždy na vašej strane</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFIKÁTY -->
+  <section id="certifikaty" style="padding: 100px 60px; border-bottom: 1px solid var(--border);">
+    <div style="max-width: 860px; margin: 0 auto;">
+      <p class="section-eyebrow">Certifikáty</p>
+      <h2 class="section-heading" style="margin-bottom: 12px;">Overená odbornosť</h2>
+      <p class="body-text" style="margin-bottom: 40px; max-width: 520px;">Všetky certifikáty sú vydané príslušnými regulačnými orgánmi a potvrdzujú odbornú spôsobilosť na poskytovanie finančného poradenstva.</p>
+      <div class="cert-grid">
+        <a class="cert-card" href="certifikat%20zivotna.pdf" target="_blank" rel="noopener">
+          <div class="cert-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>
+            </svg>
+          </div>
+          <div class="cert-body">
+            <div class="cert-title">Životné poistenie</div>
+            <div class="cert-sub">Certifikát odbornej spôsobilosti</div>
+          </div>
+          <div class="cert-arrow">→</div>
+        </a>
+        <a class="cert-card" href="certifikat%20uverove.pdf" target="_blank" rel="noopener">
+          <div class="cert-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>
+            </svg>
+          </div>
+          <div class="cert-body">
+            <div class="cert-title">Úverové produkty</div>
+            <div class="cert-sub">Certifikát odbornej spôsobilosti</div>
+          </div>
+          <div class="cert-arrow">→</div>
+        </a>
+        <a class="cert-card" href="certifikat%20kapitalovy%20trh.pdf" target="_blank" rel="noopener">
+          <div class="cert-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>
+            </svg>
+          </div>
+          <div class="cert-body">
+            <div class="cert-title">Kapitálový trh</div>
+            <div class="cert-sub">Certifikát odbornej spôsobilosti</div>
+          </div>
+          <div class="cert-arrow">→</div>
+        </a>
+        <a class="cert-card" href="certifikat%20dochodkove%20sporenie.pdf" target="_blank" rel="noopener">
+          <div class="cert-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>
+            </svg>
+          </div>
+          <div class="cert-body">
+            <div class="cert-title">Dôchodkové sporenie</div>
+            <div class="cert-sub">Certifikát odbornej spôsobilosti</div>
+          </div>
+          <div class="cert-arrow">→</div>
+        </a>
       </div>
     </div>
   </section>
